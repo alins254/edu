@@ -20,4 +20,4 @@ Functionalitati-le de mai sus vor fi implementate utilizand android ca interfata
 
 ## Diagrama bazei de date
 
-![alt text](Studhub_DB.jpg)
+![alt text](Studhub_DB.png)
