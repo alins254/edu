@@ -24,6 +24,7 @@ public abstract class User {
     User(){
         dateOfBirth = new Date();
         id = UUID.randomUUID().toString();
+        account = null;
     }
 
     User(String name, Date dateOfBirth, Account account) {

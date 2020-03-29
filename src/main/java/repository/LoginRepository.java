@@ -1,6 +1,6 @@
 package repository;
 
-import com.example.sd2020.demo.Konstants;
+import Utilities.Konstants;
 import entity.Account;
 import entity.User;
 
@@ -21,65 +21,6 @@ public class LoginRepository implements LoginRepo{
         return singletone;
     }
 
-    public String addUser(User user){
-        /**
-         * Pentru fiecare metoda se instantiaza un entiy manager din EMF-ul de mai sus.
-         */
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        /**
-         * Denota ca incepe o operatie pe baza de date
-         */
-        entityManager.getTransaction().begin();
-        /**
-         * Declaram operatia sau operatiile ce se vor face pe BD.
-         */
-        User existingUser = entityManager.find(User.class, user.id);
-        if(existingUser != null){
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return "Username already exists!";
-        }
-        entityManager.merge(user);
-        /**
-         * Executam operatia.
-         */
-        entityManager.getTransaction().commit();
-        /**
-         * Inchidem EM-ul. Ca la operatii pe fisiere, il deschizi, il citesti si in final il inchizi.
-         */
-        entityManager.close();
-        return "Success!";
-    }
-
-    public String addAccount(Account account){
-        /**
-         * Pentru fiecare metoda se instantiaza un entiy manager din EMF-ul de mai sus.
-         */
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        /**
-         * Denota ca incepe o operatie pe baza de date
-         */
-        entityManager.getTransaction().begin();
-        /**
-         * Declaram operatia sau operatiile ce se vor face pe BD.
-         */
-        /*Account existingAcc = entityManager.find(Account.class, account.username);
-        if(existingAcc != null){
-            entityManager.getTransaction().commit();
-            entityManager.close();
-            return "Username already exists!";
-        }*/
-        entityManager.merge(account);
-        /**
-         * Executam operatia.
-         */
-        entityManager.getTransaction().commit();
-        /**
-         * Inchidem EM-ul. Ca la operatii pe fisiere, il deschizi, il citesti si in final il inchizi.
-         */
-        entityManager.close();
-        return "Success!";
-    }
 
     @Override
     public User attemptLogin(Account account) {
