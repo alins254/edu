@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import repository.AdminRepository;
 import repository.LoginRepo;
+import repository.TeacherRepo;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		AdminRepository adminRepository = AdminRepository.getInstance();
+		TeacherRepo teacherRepo = TeacherRepo.getInstance();
 		Account a1 = new Account("teach","teach");
 		User t1 = new Teacher("Ion",new Date(),a1);
 		a1.setUser(t1);
@@ -25,6 +27,8 @@ public class DemoApplication {
 		Account a3 = new Account("admin","admin");
 		User us3 = new Administrator("Vasile",new Date(), a3);
 		adminRepository.addUser(us3);
+		Course c1 = new Course("PS2020","Password","PS1", new Date(), new Date(),(Teacher)t1);
+		teacherRepo.addCourse(c1);
 		//SpringApplication.run(DemoApplication.class, args);
 		//LoginService loginService = new LoginService(LoginRepo.getInstance());
 		//User user = loginService.attemptLogin("teach1", "123");
