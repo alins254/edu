@@ -1,13 +1,22 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Students")
 public class Student extends User{
     @Column
     private int studyYear;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Students_Courses",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")}
+    )
+    public List<Course> courseList = new ArrayList<Course>();
 
     public Student(){};
 

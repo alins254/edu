@@ -1,7 +1,9 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name="Courses")
@@ -25,6 +27,9 @@ public class Course {
     @JoinColumn(name="teacher_ID")
     Teacher teacher;
 
+    @ManyToMany(mappedBy = "courseList")
+    public List<Student> studentList = new ArrayList<Student>();
+
     public Course() {
         this.registerID = UUID.randomUUID().toString();
         teacher = null;
@@ -46,4 +51,5 @@ public class Course {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
 }

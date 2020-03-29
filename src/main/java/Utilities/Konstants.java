@@ -13,6 +13,9 @@ public class Konstants {
     public static final String USERNAME_EXISTS = "Username already exists!";
     public static final String USERNAME_DOESNT_EXIST = "Username does not exist!";
     public static final String TEACHER_DOESNT_EXIST = "Teacher does not exist!";
+    public static final String STUDENT_DOESNT_EXIST = "Student does not exist!";
+    public static final String COURSE_DOESNT_EXIST = "Invalid Course Id";
+    public static final String COURSE_PASSWORD_WRONG = "Wrong Course Password";
     public static final String COURSE_EXISTS = "Course already exists!";
 
 }

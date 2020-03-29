@@ -82,7 +82,8 @@ public class AdminRepository implements AdminRepo{
         em.getTransaction().begin();
         Query query = em.createQuery("SELECT p FROM " + User.class.getSimpleName() + "s p");
         em.getTransaction().commit();
+        ArrayList<User> users = (ArrayList<User>) query.getResultList();
         em.close();
-        return (ArrayList<User>) query.getResultList();
+        return users;
     }
 }
