@@ -25,6 +25,11 @@ public class TeacherService {
         if(!message.equals(Konstants.VALID))
             return new MessageBundle(message, null);
 
-        return teacherRepo.addCourse(new Course(registerID,registerPassword,name,startDate,endDate,teacher));
+        MessageBundle messageBundle = teacherRepo.addCourse(new Course(registerID,registerPassword,name,startDate,endDate,teacher));
+        if(messageBundle.object!=null){
+            Course course = (Course)messageBundle.object;
+            course.addObserver(teacher);
+        }
+        return messageBundle;
     }
 }

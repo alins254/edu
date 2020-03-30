@@ -53,7 +53,7 @@ public class StudentRepository implements StudentRepo {
         entityManager.merge(student);
         entityManager.getTransaction().commit();
         entityManager.close();
-        return new MessageBundle(Konstants.SUCCESS, student);
+        return new MessageBundle(Konstants.SUCCESS, dbCourse);
     }
 
 

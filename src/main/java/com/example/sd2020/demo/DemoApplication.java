@@ -1,6 +1,7 @@
 package com.example.sd2020.demo;
 
 import business.LoginService;
+import business.StudentService;
 import entity.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ public class DemoApplication {
 		AdminRepository adminRepository = AdminRepository.getInstance();
 		TeacherRepo teacherRepo = TeacherRepo.getInstance();
 		StudentRepository studentRepository = StudentRepository.getInstance();
+		StudentService studentService = new StudentService();
 
 		Account a1 = new Account("teach2","teach");
 		User t1 = new Teacher("Ionel",new Date(),a1);
@@ -32,7 +34,7 @@ public class DemoApplication {
 		Student s2 = new Student("Ghita",new Date(),a2);
 		a2.setUser(s2);
 		adminRepository.addUser(s2);
-		studentRepository.enrollStudent(s2, "PS2021", "Password");
+		studentService.enrollStudent(s2, "PS2021", "Password");
 
 		System.out.println(studentRepository.getStudentCourses(s2).size());
 

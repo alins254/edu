@@ -28,7 +28,11 @@ public class Course {
     Teacher teacher;
 
     @ManyToMany(mappedBy = "courseList")
-    public List<Student> studentList = new ArrayList<Student>();
+    private List<Student> studentList = new ArrayList<Student>();
+
+    @Transient
+    private List<User> observers = new ArrayList<User>();
+
 
     public Course() {
         this.registerID = UUID.randomUUID().toString();
@@ -52,4 +56,22 @@ public class Course {
         this.teacher = teacher;
     }
 
+    public void addObserver(User user) {
+        this.observers.add(user);
+    }
+
+    public void removeObserver(User user) {
+        this.observers.remove(user);
+    }
+
+    public void addStudent(Student student) {
+        studentList.add(student);
+        for (User user : this.observers) {
+            user.update(student);
+        }
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
 }

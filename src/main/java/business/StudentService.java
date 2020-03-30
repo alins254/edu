@@ -1,5 +1,6 @@
 package business;
 
+import entity.Course;
 import entity.MessageBundle;
 import entity.Student;
 import repository.StudentRepo;
@@ -12,7 +13,11 @@ public class StudentService {
     }
 
     public MessageBundle enrollStudent(Student student, String courseId, String coursePassword){
-
-        return studentRepo.enrollStudent(student,courseId,coursePassword);
+        MessageBundle messageBundle = studentRepo.enrollStudent(student,courseId,coursePassword);
+        if(messageBundle.object==null){
+            Course course = (Course)messageBundle.object;
+            course.addStudent(student);
+        }
+        return messageBundle;
     }
 }

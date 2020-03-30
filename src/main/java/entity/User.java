@@ -49,4 +49,10 @@ public abstract class User {
     public int hashCode() {
         return Objects.hash(id, name, dateOfBirth, account);
     }
+
+    void update(Object obj){
+        if(obj instanceof Student){
+            System.out.println(((Student) obj).name+" joined the course!");
+        }
+    }
 }
