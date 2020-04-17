@@ -34,7 +34,7 @@ public class DemoApplication {
 		Student s2 = new Student("Ghita",new Date(),a2);
 		a2.setUser(s2);
 		adminRepository.addUser(s2);
-		studentService.enrollStudent(s2, "PS2021", "Password");
+		//studentService.enrollStudent(s2, "PS2021", "Password");
 
 		System.out.println(studentRepository.getStudentCourses(s2).size());
 

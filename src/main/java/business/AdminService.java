@@ -12,17 +12,24 @@ import repository.AdminRepo;
 import wrappers.AddUserWrapper;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 @RestController
 public class AdminService {
-    //de verificat la addUser daca field-ul Account al obiectului User este gol
     AdminRepo adminRepo;
 
     public AdminService(){
         adminRepo = AdminRepo.getInstance();
     }
 
+    /**
+     * Given an AddUserWrapper object it validates the data
+     * and then calls the repository method which will attempt
+     * to introduce a new user and his account into the database
+     * @param wrapper its a wrapper of all the data need in order to add the user into the database
+     * @return a MessageBundle containing in the object field the user object and the message "Success"
+     * if the user has been successfully added into the database, or a null reference and the error message
+     * if the user has not been added into the database
+     */
     @PostMapping("/addUser")
     public MessageBundle addUser(@RequestBody AddUserWrapper wrapper){
         String message = Validators.validateLogin(wrapper.username,wrapper.password);
@@ -35,7 +42,15 @@ public class AdminService {
         return adminRepo.addUser(user);
     }
 
-
+    /**
+     * Given an username verify if it is valid and then calls the repository
+     * method responsible for eliminating the user with the given username.
+     * The method will also remove the user's account from the database.
+     * @param username the username of the user which have to be removed
+     * @return a MessageBundle containing in the object field a null reference and the message "Success"
+     * if the user has been successfully removed into the database, or a null reference and the error message
+     * if the user has not been removed into the database
+     */
     @PostMapping("/removeUser")
     public MessageBundle removeUser(@RequestBody String username){
         String message = Validators.validateUsername(username);
@@ -46,6 +61,10 @@ public class AdminService {
         return adminRepo.removeUser(username);
     }
 
+    /**
+     * It gets all the users from the database
+     * @return A list including all the users from the database
+     */
     @GetMapping("/listAllUsers")
     public ArrayList<User> listAllUsers(){
         return adminRepo.listAllUsers();

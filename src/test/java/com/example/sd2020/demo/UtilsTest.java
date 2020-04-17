@@ -2,8 +2,7 @@ package com.example.sd2020.demo;
 
 import Utilities.Konstants;
 import Utilities.Utils;
-import entity.Account;
-import entity.User;
+import entity.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,8 +20,24 @@ public class UtilsTest {
     public void utilsCreateUserStudent(){
         Date date = new Date();
         Account account = new Account("test1","test2");
-        User student = Utils.createUser("student",date, account, Konstants.T_STUDENT);
-        assert(student.name.equals("student")&&student.dateOfBirth.equals(date)&&student.account.equals(account));
+        User user = Utils.createUser("student",date, account, Konstants.T_STUDENT);
+        assert(user.name.equals("student")&&user.dateOfBirth.equals(date)&&user.account.equals(account)&&user instanceof Student);
+    }
+
+    @Test
+    public void utilsCreateUserTeacher(){
+        Date date = new Date();
+        Account account = new Account("test1","test2");
+        User user = Utils.createUser("teacher",date, account, Konstants.T_TEACHER);
+        assert(user.name.equals("teacher")&&user.dateOfBirth.equals(date)&&user.account.equals(account)&&user instanceof Teacher);
+    }
+
+    @Test
+    public void utilsCreateUserAdministrator(){
+        Date date = new Date();
+        Account account = new Account("test1","test2");
+        User user = Utils.createUser("admin",date, account, Konstants.T_ADMIN);
+        assert(user.name.equals("admin")&&user.dateOfBirth.equals(date)&&user.account.equals(account)&&user instanceof Administrator);
     }
 
 }

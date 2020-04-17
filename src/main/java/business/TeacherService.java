@@ -21,6 +21,15 @@ public class TeacherService {
         teacherRepo = TeacherRepo.getInstance();
     }
 
+    /**
+     * Validate the received data and then calls the repository method
+     * responsible for adding the course into the database.
+     * The teacher will be added into the course's observer list
+     * @param wrapper containing the data necessary for attempting the adding of the course into the database
+     * @return a MessageBundle containing in the object field the course object and the message "Success"
+     * if the course has been successfully added into the database, or a null reference and the error messages
+     * if the course has not been successfully added into the database
+     */
     @PostMapping("/addCourse")
     public MessageBundle addCourse(@RequestBody AddCourseWrapper wrapper){
         if(wrapper.teacher == null)

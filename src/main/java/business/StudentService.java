@@ -2,7 +2,6 @@ package business;
 
 import entity.Course;
 import entity.MessageBundle;
-import entity.Student;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +16,12 @@ public class StudentService {
         studentRepo = StudentRepo.getInstace();
     }
 
+    /**
+     * Calls the repository method responsible for enrolling the student to a course
+     * and adds the student into the course's list of students
+     * @param wrapper containing the data necessary to attempt the enrollment process
+     * @return a MessageBundle containing in the return value of the repository method
+     */
     @PostMapping("/enrollStudent")
     public MessageBundle enrollStudent(@RequestBody EnrollStudentWrapper wrapper){
         MessageBundle messageBundle = studentRepo.enrollStudent(wrapper.student,wrapper.courseId,wrapper.coursePassword);
