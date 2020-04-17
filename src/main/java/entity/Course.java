@@ -64,6 +64,10 @@ public class Course {
         this.observers.remove(user);
     }
 
+    public List<User> getObservers() {
+        return observers;
+    }
+
     public void addStudent(Student student) {
         studentList.add(student);
         for (User user : this.observers) {

@@ -16,6 +16,10 @@ public class StudentService {
         studentRepo = StudentRepo.getInstace();
     }
 
+    public StudentService(StudentRepo studentRepo){
+        this.studentRepo = studentRepo;
+    }
+
     /**
      * Calls the repository method responsible for enrolling the student to a course
      * and adds the student into the course's list of students

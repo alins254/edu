@@ -21,6 +21,9 @@ public class TeacherService {
         teacherRepo = TeacherRepo.getInstance();
     }
 
+    public TeacherService(TeacherRepo teacherRepo){
+        this.teacherRepo = teacherRepo;
+    }
     /**
      * Validate the received data and then calls the repository method
      * responsible for adding the course into the database.

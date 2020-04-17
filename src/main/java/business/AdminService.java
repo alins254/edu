@@ -21,6 +21,10 @@ public class AdminService {
         adminRepo = AdminRepo.getInstance();
     }
 
+    public AdminService(AdminRepo adminRepo){
+        this.adminRepo = adminRepo;
+    }
+
     /**
      * Given an AddUserWrapper object it validates the data
      * and then calls the repository method which will attempt
