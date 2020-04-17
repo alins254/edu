@@ -3,8 +3,11 @@ package business;
 import entity.Account;
 import entity.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import repository.LoginRepo;
 
+@RestController
 public class LoginService {
     private LoginRepo loginRepo;
 
@@ -13,8 +16,8 @@ public class LoginService {
     }
 
     @GetMapping("/attemptLogin") // localhost:8080/attemptLogin
-    public User attemptLogin(String username, String password){
-        Account toBeLoggedIn = new Account(username,password);
+    public User attemptLogin(@RequestBody Account account){
+        Account toBeLoggedIn = new Account(account.getUsername(),account.getPassword());
         User user = loginRepo.attemptLogin(toBeLoggedIn);
         if(user == null)
             System.out.println("Login attempt failed");
