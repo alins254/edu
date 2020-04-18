@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### UML Diagrams ###
+.drawio
+/src/main/java/com/example/sd2020/demo/

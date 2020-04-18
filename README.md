@@ -18,6 +18,24 @@ Functionalitati-le de mai sus vor fi implementate utilizand android ca interfata
 
 # Implementare
 
-## Diagrama bazei de date
+## Baza de date
+Interactiunea cu baza de date este realizata prin intermediul ORM-ului Hibernate. Aceasta este alcatuita din sase tabele: accounts, administrators, courses, students, students_courses and teachers. Relatiile dintre tabele, precum si campurile acestora pot fi vazute in cadrul diagramei de mai jos.
+![alt text](Studhub_DB.jpg)
 
-![alt text](Studhub_DB.png)
+## Structura aplicatiei
+Aplicatia este structurata pe baza arhitecturii BLL continand urmatoarele pachete:
+  - Business unde se afla logica aplicatiei
+  - Repository responsabila pentru operatiile CRUD cu baza de date
+  - Entity ce contine modelele utilizate de aplicatie
+  - Wrappers unde se afla wrapperele necesare comunicarii prin intermediul spring cu clientii
+  - Utilities ce cuprinde constantele, validatorii si metode statice utilizate de logica aplicatiei
+
+##### Diagrama pe pachete a aplicatiei
+![alt text](Package_Diagram.png)
+
+##### Design Patterns
+Legatura intre layer-ul de business si cel de repository s-a realizat prin intermediul design pattern-ului ***Facade*** care ofera posibilitatea inlocuirii operatiilor de acces la baza de date utilizand alte tehnologii. Acestea din urma trebuie doar sa implementeze interfetele corespunzatoare, asigurând astfel implementarea acelorași funcționalități.
+
+În același timp, ne-am dori ca aplicația sa notifice profesorul când un student s-a înregistrat cu succes în cadrul cursului pe care acesta îl predă. Această funcționalitate a fost implementată utilizand design pattern-ul ***Observer***. La crearea cursului, profesorul este adăugat în lista de observatori a acelui curs și urmează a fi anunțat la înrolarea fiecărui student.
+
+Existența a trei tipuri de conturi în cadrul aplicației: *Administrator*, *Profesor* si *Student*, duce la încărcarea și îngreunarea logicii de business a aplicației. Pentru a elimina această logică suplimentară, am introdus utilizând design pattern-ul ***Factory*** o metodă in cadrul clasei Utils din pachetul Utilities care se ocupă de crearea obiectului potrivit. Această metodă primește ca argumente datele personale ale posesorului contului: nume, data nașterii si account-ul aferent, plus o variabilă care menționează tipul obiectului ce dorește a fi creat. Rezultatul returnat este obiectul dorit! 
