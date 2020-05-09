@@ -39,3 +39,7 @@ Legatura intre layer-ul de business si cel de repository s-a realizat prin inter
 În același timp, ne-am dori ca aplicația sa notifice profesorul când un student s-a înregistrat cu succes în cadrul cursului pe care acesta îl predă. Această funcționalitate a fost implementată utilizand design pattern-ul ***Observer***. La crearea cursului, profesorul este adăugat în lista de observatori a acelui curs și urmează a fi anunțat la înrolarea fiecărui student.
 
 Existența a trei tipuri de conturi în cadrul aplicației: *Administrator*, *Profesor* si *Student*, duce la încărcarea și îngreunarea logicii de business a aplicației. Pentru a elimina această logică suplimentară, am introdus utilizând design pattern-ul ***Factory*** o metodă in cadrul clasei Utils din pachetul Utilities care se ocupă de crearea obiectului potrivit. Această metodă primește ca argumente datele personale ale posesorului contului: nume, data nașterii si account-ul aferent, plus o variabilă care menționează tipul obiectului ce dorește a fi creat. Rezultatul returnat este obiectul dorit! 
+
+##### Diagrama de secventa
+Mai jos se găsește diagrama de secvență pentru procesul de înrolare a unui student:
+![alt text](Sequence_Diagram.png)
