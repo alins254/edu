@@ -20,8 +20,14 @@ public class Utils {
             case Konstants.T_STUDENT: return new Student(name,dateOfBirth,account);
             case Konstants.T_ADMIN: return new Administrator(name,dateOfBirth,account);
             default: return null;
-
         }
+    }
+
+    public static String getUserType(User user){
+        if(user instanceof Teacher) return Konstants.T_TEACHER;
+        if(user instanceof Student) return Konstants.T_STUDENT;
+        if(user instanceof Administrator) return Konstants.T_ADMIN;
+        return "";
     }
 
 }

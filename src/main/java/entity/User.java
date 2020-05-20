@@ -1,5 +1,7 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -18,6 +20,7 @@ public abstract class User {
 
     @OneToOne
     @JoinColumn(name="username")
+    @JsonIgnore
     public Account account;
 
     User(){

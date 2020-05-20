@@ -37,10 +37,10 @@ public interface AdminRepo {
 
     /**
      * Lists all the users with the given type from the database
-     * @param user A reference to a user type object representing the type which is being to be retrieved
+     * @param table A reference to the database table with the object type representing the type which is going to be retrieved
      * @return the list of all the user with the given type from the database
      */
-    public ArrayList<User> listUsersWithType(User user);
+    public ArrayList<User> listUsersWithType(String table);
 
     /**
      * Lists all the users from the database

@@ -4,16 +4,11 @@ import Utilities.Konstants;
 import Utilities.Utils;
 import Utilities.Validators;
 import entity.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import repository.AdminRepo;
 import wrappers.AddUserWrapper;
 
 import java.util.ArrayList;
 
-@RestController
 public class AdminService {
     AdminRepo adminRepo;
 
@@ -34,8 +29,7 @@ public class AdminService {
      * if the user has been successfully added into the database, or a null reference and the error message
      * if the user has not been added into the database
      */
-    @PostMapping("/addUser")
-    public MessageBundle addUser(@RequestBody AddUserWrapper wrapper){
+    public MessageBundle addUser(AddUserWrapper wrapper){
         String message = Validators.validateLogin(wrapper.username,wrapper.password);
 
         if(!message.equals(Konstants.VALID))
@@ -55,8 +49,7 @@ public class AdminService {
      * if the user has been successfully removed into the database, or a null reference and the error message
      * if the user has not been removed into the database
      */
-    @PostMapping("/removeUser")
-    public MessageBundle removeUser(@RequestBody String username){
+    public MessageBundle removeUser(String username){
         String message = Validators.validateUsername(username);
 
         if(!message.equals(Konstants.VALID))
@@ -69,9 +62,10 @@ public class AdminService {
      * It gets all the users from the database
      * @return A list including all the users from the database
      */
-    @GetMapping("/listAllUsers")
     public ArrayList<User> listAllUsers(){
         return adminRepo.listAllUsers();
     }
+
+    public String test1(){ return "test"; }
 
 }

@@ -1,6 +1,6 @@
 package com.example.sd2020.demo;
 
-import business.LoginService;
+
 import business.StudentService;
 import entity.*;
 import org.springframework.boot.SpringApplication;
@@ -9,13 +9,15 @@ import repository.AdminRepository;
 import repository.LoginRepo;
 import repository.StudentRepository;
 import repository.TeacherRepo;
-
+import business.AdminService;
+import business.LoginService;
 import java.util.Date;
 
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
+
 		AdminRepository adminRepository = AdminRepository.getInstance();
 		TeacherRepo teacherRepo = TeacherRepo.getInstance();
 		StudentRepository studentRepository = StudentRepository.getInstance();
@@ -36,8 +38,11 @@ public class DemoApplication {
 		adminRepository.addUser(s2);
 		//studentService.enrollStudent(s2, "PS2021", "Password");
 
-		System.out.println(studentRepository.getStudentCourses(s2).size());
-
+		//System.out.println("Accccccccccc =  "+(new AdminService()).listAllUsers().size());
+		for(User u: (new AdminService()).listAllUsers())
+			System.out.println(u.name);
+		//System.out.println(studentRepository.getStudentCourses(s2).size());
+		SpringApplication.run(DemoApplication.class, args);
 
 	}
 

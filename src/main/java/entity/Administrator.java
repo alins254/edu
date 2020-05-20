@@ -1,9 +1,11 @@
 package entity;
 
+import Utilities.Konstants;
+
 import javax.persistence.Entity;
 import java.util.Date;
 
-@Entity(name = "Administrators")
+@Entity(name = Konstants.DB_ADMIN)
 public class Administrator extends User{
     public Administrator(){};
 

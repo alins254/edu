@@ -69,18 +69,18 @@ public class AdminRepository implements AdminRepo{
     public ArrayList<User> listAllUsers(){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        ArrayList<User> userArrayList = listUsersWithType(new Administrator());
-        userArrayList.addAll(listUsersWithType(new Teacher()));
-        userArrayList.addAll(listUsersWithType(new Student()));
+        ArrayList<User> userArrayList = listUsersWithType(Konstants.DB_ADMIN);
+        userArrayList.addAll(listUsersWithType(Konstants.DB_TEACHER));
+        userArrayList.addAll(listUsersWithType(Konstants.DB_STUDENT));
         em.getTransaction().commit();
         em.close();
         return userArrayList;
     }
 
-    public ArrayList<User> listUsersWithType(User user){
+    public ArrayList<User> listUsersWithType(String table){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT p FROM " + User.class.getSimpleName() + "s p");
+        Query query = em.createQuery("SELECT p FROM " + table + " p");
         em.getTransaction().commit();
         ArrayList<User> users = (ArrayList<User>) query.getResultList();
         em.close();

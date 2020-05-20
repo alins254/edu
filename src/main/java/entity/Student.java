@@ -1,11 +1,14 @@
 package entity;
 
+import Utilities.Konstants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "Students")
+@Entity(name = Konstants.DB_STUDENT)
 public class Student extends User{
     @Column
     private int studyYear;
@@ -16,6 +19,7 @@ public class Student extends User{
             joinColumns = {@JoinColumn(name = "student_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")}
     )
+    @JsonIgnore
     public List<Course> courseList = new ArrayList<Course>();
 
     public Student(){};

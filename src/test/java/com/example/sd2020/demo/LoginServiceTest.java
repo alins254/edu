@@ -37,7 +37,7 @@ public class LoginServiceTest {
         User expected = new Teacher("Ion",new Date(),account);
 
         when(loginRepo.attemptLogin(account)).thenReturn(expected);
-        User result = loginService.attemptLogin(account);
+        User result = (User) loginService.attemptLogin(account).object;
         assertEquals(expected,result);
         verify(loginRepo).attemptLogin(account);
     }
@@ -47,7 +47,7 @@ public class LoginServiceTest {
         Account account = new Account("abc","1234");
 
         when(loginRepo.attemptLogin(account)).thenReturn(null);
-        User result = loginService.attemptLogin(account);
+        User result = (User) loginService.attemptLogin(account).object;
         assertEquals(null,result);
         verify(loginRepo).attemptLogin(account);
     }

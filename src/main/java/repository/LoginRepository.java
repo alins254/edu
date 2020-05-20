@@ -47,14 +47,30 @@ public class LoginRepository implements LoginRepo{
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("SELECT t FROM Teachers t WHERE username = '" + founded.getUsername()+"'");
         entityManager.getTransaction().commit();
-        User teacher = (User) q.getResultList().get(0);
-        if(teacher != null)
-            return teacher;
+        if(!q.getResultList().isEmpty()){
+            User teacher = (User) q.getResultList().get(0);
+            if(teacher != null)
+                return teacher;
+        }
 
         entityManager.getTransaction().begin();
         q = entityManager.createQuery("SELECT s FROM Students s WHERE username = '" + founded.getUsername()+"'");
         entityManager.getTransaction().commit();
-        User student = (User) q.getResultList().get(0);
-        return student;
+        if(!q.getResultList().isEmpty()) {
+            User student = (User) q.getResultList().get(0);
+            if (student != null)
+                return student;
+        }
+
+        entityManager.getTransaction().begin();
+        q = entityManager.createQuery("SELECT s FROM Administrators s WHERE username = '" + founded.getUsername()+"'");
+        entityManager.getTransaction().commit();
+        if(!q.getResultList().isEmpty()) {
+            User admin = (User) q.getResultList().get(0);
+            if (admin != null)
+                return admin;
+        }
+
+        return null;
     }
 }

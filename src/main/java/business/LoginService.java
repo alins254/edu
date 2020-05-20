@@ -1,13 +1,11 @@
 package business;
 
+import Utilities.Utils;
 import entity.Account;
+import entity.MessageBundle;
 import entity.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import repository.LoginRepo;
 
-@RestController
 public class LoginService {
     private LoginRepo loginRepo;
 
@@ -19,15 +17,15 @@ public class LoginService {
      * Given an account it calls the repository method responsible
      * of retrieving the corresponding user from the database
      * @param account The user credentials
-     * @return The user with the given credentials
+     * @return MessageBundle containing
+     * The user with the given credentials and type
      * if they can be found into the database
      * or a null reference if they cannot be found
      */
-    @GetMapping("/attemptLogin") // localhost:8080/attemptLogin
-    public User attemptLogin(@RequestBody Account account){
+    public MessageBundle attemptLogin(Account account){
         User user = loginRepo.attemptLogin(account);
         if(user == null)
-            System.out.println("Login attempt failed");
-        return user;
+            return new MessageBundle("Incorrect username or password", null);
+        return new MessageBundle(Utils.getUserType(user),user);
     }
 }
