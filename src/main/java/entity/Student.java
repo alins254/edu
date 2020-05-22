@@ -13,7 +13,7 @@ public class Student extends User{
     @Column
     private int studyYear;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Students_Courses",
             joinColumns = {@JoinColumn(name = "student_id")},

@@ -17,7 +17,7 @@ public class Validators {
         String messages = new String("");
         if(username.length()<8) messages+="username to short - ";
         if(username.length()>30) messages+="username to long - ";
-        if(username.contains(" "))  messages+="username cannot contain spaces - ";
+        if(username.contains(" ")) messages+="username cannot contain spaces - ";
         return messages;
     }
 

@@ -22,50 +22,90 @@ public class StudentRepository implements StudentRepo {
 
 
     @Override
-    public MessageBundle enrollStudent(Student student, String courseId, String coursePassword) {
+    public MessageBundle enrollStudent(String studentId, String courseId, String coursePassword) {
+        MessageBundle messageBundle = validateEnrollment(studentId,courseId,coursePassword);
+        if(!messageBundle.message.equals(Konstants.VALID))
+            return messageBundle;
+
+        Student dbStudent = (Student)messageBundle.object;
+        Course dbCourse = (Course)messageBundle.extraObject;
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
+        dbStudent.courseList = getStudentCourses(dbStudent.id);
+        dbStudent.courseList.add(dbCourse);
         entityManager.getTransaction().begin();
-        Student dbStudent = entityManager.find(Student.class, student.id);
-        entityManager.getTransaction().commit();
-
-        if(dbStudent == null){
-            entityManager.close();
-            return new MessageBundle(Konstants.STUDENT_DOESNT_EXIST,null);
-        }
-
-        entityManager.getTransaction().begin();
-        Course dbCourse = entityManager.find(Course.class, courseId);
-        entityManager.getTransaction().commit();
-
-        if(dbCourse == null){
-            entityManager.close();
-            return new MessageBundle(Konstants.COURSE_DOESNT_EXIST,null);
-        }
-
-        if(!dbCourse.registerPassword.equals(coursePassword)){
-            entityManager.close();
-            return new MessageBundle(Konstants.COURSE_PASSWORD_WRONG,null);
-        }
-        student.courseList = getStudentCourses(student);
-        student.courseList.add(dbCourse);
-        entityManager.getTransaction().begin();
-        entityManager.merge(student);
+        entityManager.merge(dbStudent);
         entityManager.getTransaction().commit();
         entityManager.close();
+
         return new MessageBundle(Konstants.SUCCESS, dbCourse);
     }
 
+    MessageBundle validateEnrollment(String studentId, String courseId, String coursePassword){
+        Student dbStudent;
+        Course dbCourse;
 
-    public ArrayList<Course> getStudentCourses(Student student){
+        if((dbStudent = checkStudentId(studentId)) == null)
+            return new MessageBundle(Konstants.STUDENT_DOESNT_EXIST,null);
+
+        if((dbCourse = checkCourseId(courseId)) == null)
+            return new MessageBundle(Konstants.COURSE_DOESNT_EXIST,null);
+
+        if(!dbCourse.registerPassword.equals(coursePassword))
+            return new MessageBundle(Konstants.COURSE_PASSWORD_WRONG,null);
+
+        if(alreadyEnrolled(dbStudent.id,courseId))
+            return new MessageBundle(Konstants.ALREADY_ENROLLED,null);
+
+        MessageBundle messageBundle = new MessageBundle(Konstants.VALID, dbStudent);
+        messageBundle.setExtraObject(dbCourse);
+        return messageBundle;
+    }
+
+
+    public ArrayList<Course> getStudentCourses(String studentId){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         entityManager.getTransaction().begin();
-        System.out.println("SELECT c FROM Courses c join c.studentList s where s.id = \'"+student.id+"\'");
-        Query query = entityManager.createQuery("SELECT c FROM Courses c join c.studentList s where s.id =\'"+student.id+"\'");
+        Query query = entityManager.createQuery("SELECT c FROM Courses c join c.studentList s where s.id =\'"+studentId+"\'");
         entityManager.getTransaction().commit();
         ArrayList<Course> courses = (ArrayList<Course>) query.getResultList();
         entityManager.close();
         return courses;
+    }
+
+    Student checkStudentId(String studentId){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        Student dbStudent = entityManager.find(Student.class, studentId);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return dbStudent;
+    }
+
+    Course checkCourseId(String studentId){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        Course dbCourse = entityManager.find(Course.class, studentId);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        return dbCourse;
+    }
+
+    boolean alreadyEnrolled(String studentId, String courseId){
+        ArrayList<Course> courses = getStudentCourses(studentId);
+
+        for(Course c: courses)
+            if(c.registerID.equals(courseId)){
+                return true;
+            }
+
+        return false;
     }
 }

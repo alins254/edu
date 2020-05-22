@@ -23,11 +23,6 @@ public class StudentService {
      * @return a MessageBundle containing in the return value of the repository method
      */
     public MessageBundle enrollStudent(EnrollStudentWrapper wrapper){
-        MessageBundle messageBundle = studentRepo.enrollStudent(wrapper.student,wrapper.courseId,wrapper.coursePassword);
-        if(messageBundle.object!=null){
-            Course course = (Course)messageBundle.object;
-            course.addStudent(wrapper.student);
-        }
-        return messageBundle;
+        return studentRepo.enrollStudent(wrapper.studentId,wrapper.courseId,wrapper.coursePassword);
     }
 }

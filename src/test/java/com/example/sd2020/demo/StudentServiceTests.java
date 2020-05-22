@@ -37,9 +37,9 @@ public class StudentServiceTests {
     @Test
     public void testEnrollStudent(){
         Student student = (Student) Utils.createUser("abc",new Date(), new Account("username","password"), Konstants.T_STUDENT);
-        EnrollStudentWrapper wrapper = new EnrollStudentWrapper(student,"ps2020_1","passwd");
+        EnrollStudentWrapper wrapper = new EnrollStudentWrapper(student.id,"ps2020_1","passwd");
         Course expected = new Course(wrapper.courseId,wrapper.coursePassword, "ps2020", new Date(), new Date(),null);
-        when(studentRepo.enrollStudent(any(Student.class),anyString(),anyString())).thenReturn(new MessageBundle(Konstants.SUCCESS,expected));
+        when(studentRepo.enrollStudent(anyString(),anyString(),anyString())).thenReturn(new MessageBundle(Konstants.SUCCESS,expected));
 
         MessageBundle messageBundle = studentService.enrollStudent(wrapper);
         assert(messageBundle.message.equals(Konstants.SUCCESS));
@@ -49,6 +49,6 @@ public class StudentServiceTests {
         assert ((Course)messageBundle.object).startDate == expected.startDate;
         assert ((Course)messageBundle.object).endDate == expected.endDate;
 
-        verify(studentRepo).enrollStudent(any(Student.class),anyString(),anyString());
+        verify(studentRepo).enrollStudent(anyString(),anyString(),anyString());
     }
 }

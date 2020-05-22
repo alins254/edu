@@ -17,7 +17,7 @@ import java.util.Date;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-
+		/*
 		AdminRepository adminRepository = AdminRepository.getInstance();
 		TeacherRepo teacherRepo = TeacherRepo.getInstance();
 		StudentRepository studentRepository = StudentRepository.getInstance();
@@ -29,7 +29,7 @@ public class DemoApplication {
 		adminRepository.addUser(t1);
 		/*Account a3 = new Account("admin","admin");
 		User us3 = new Administrator("Vasile",new Date(), a3);
-		adminRepository.addUser(us3);*/
+		adminRepository.addUser(us3);
 		Course c1 = new Course("PS2021","Password","PS1", new Date(), new Date(),(Teacher)t1);
 		teacherRepo.addCourse(c1);
 		Account a2 = new Account("stud2","stud");
@@ -40,9 +40,12 @@ public class DemoApplication {
 
 		//System.out.println("Accccccccccc =  "+(new AdminService()).listAllUsers().size());
 		for(User u: (new AdminService()).listAllUsers())
-			System.out.println(u.name);
+			System.out.println(u.name);*/
 		//System.out.println(studentRepository.getStudentCourses(s2).size());
+
 		SpringApplication.run(DemoApplication.class, args);
+		//AdminController adminController = new AdminController();
+		//adminController.removeUser("teach2");
 
 	}
 

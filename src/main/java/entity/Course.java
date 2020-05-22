@@ -27,7 +27,7 @@ public class Course {
     @JoinColumn(name="teacher_ID")
     Teacher teacher;
 
-    @ManyToMany(mappedBy = "courseList")
+    @ManyToMany(mappedBy = "courseList", fetch = FetchType.EAGER)
     private List<Student> studentList = new ArrayList<Student>();
 
     @Transient

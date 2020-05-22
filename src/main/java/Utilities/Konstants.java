@@ -20,5 +20,6 @@ public class Konstants {
     public static final String COURSE_DOESNT_EXIST = "Invalid Course Id";
     public static final String COURSE_PASSWORD_WRONG = "Wrong Course Password";
     public static final String COURSE_EXISTS = "Course already exists!";
+    public static final String ALREADY_ENROLLED = "You are already enrolled to this course!";
 
 }

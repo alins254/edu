@@ -52,7 +52,7 @@ public class AdminService {
     public MessageBundle removeUser(String username){
         String message = Validators.validateUsername(username);
 
-        if(!message.equals(Konstants.VALID))
+        if(!message.equals(""))
             return new MessageBundle(message,null);
 
         return adminRepo.removeUser(username);
