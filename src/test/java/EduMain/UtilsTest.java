@@ -1,9 +1,8 @@
-package com.example.sd2020.demo;
+package EduMain;
 
 import Utilities.Konstants;
 import Utilities.Utils;
 import entity.*;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.junit.MockitoJUnit;

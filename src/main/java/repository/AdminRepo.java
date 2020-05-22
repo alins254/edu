@@ -2,7 +2,6 @@ package repository;
 
 import entity.MessageBundle;
 import entity.User;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 import java.util.ArrayList;
 

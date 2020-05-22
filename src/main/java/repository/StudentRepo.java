@@ -2,7 +2,6 @@ package repository;
 
 import entity.Course;
 import entity.MessageBundle;
-import entity.Student;
 
 import java.util.ArrayList;
 

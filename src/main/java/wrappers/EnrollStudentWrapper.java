@@ -1,7 +1,5 @@
 package wrappers;
 
-import entity.Student;
-
 public class EnrollStudentWrapper {
     public String studentId;
     public String courseId;

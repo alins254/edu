@@ -1,4 +1,4 @@
-package com.example.sd2020.demo;
+package EduMain;
 
 import business.LoginService;
 import entity.Account;

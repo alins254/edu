@@ -66,6 +66,4 @@ public class AdminService {
         return adminRepo.listAllUsers();
     }
 
-    public String test1(){ return "test"; }
-
 }

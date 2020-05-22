@@ -14,8 +14,6 @@ Aplicatia va permite profesorului sa creeze un curs in care sa poata adauga stud
 Studentul va fi inscris in cadrul mai multor cursuri si va putea sa isi testeze si imbunatateasca solutiile din cadrul sarcinilor lasate de catre profesor, primind indicatii cand greseste. In acest fel, i se ofera oportunitatea sa greseasca fara a avea consecinte negative. Pentru stimulare, se pot oferii si premii sub forma de badge-uri care sa ateste diferite reusite ale acestuia.
 Functionalitati-le de mai sus vor fi implementate utilizand android ca interfata cu utilizatorul, urmand ca backend-ul sa foloseasca librarii din java pentru o implementare solida si rapida. Conectarea si interactiunea cu baza de date MySQL se va face cu ajutorul ORM-ului Hibernate, iar legatura cu interfata grafica prin intermediul Spring.
 
-
-
 # Implementare
 
 ## Baza de date
@@ -43,3 +41,36 @@ Existența a trei tipuri de conturi în cadrul aplicației: *Administrator*, *Pr
 ##### Diagrama de secventa
 Mai jos se găsește diagrama de secvență pentru procesul de înrolare a unui student:
 ![alt text](Sequence_Diagram.png)
+
+## Lista Endpoint-uri disponibile
+
+1. attemptLogin - primind ca parametrii username-ul si parola verifica disponibilitatea contului in baza de date si returneaza obiectul aferent acestuia in cazul in care exista
+2. addCourse - primind ca parametrii profesorul care introduce cursul, id-ul, parola si numele cursului, data de start si data de final si returneaza obiectul nou creat in cazul in care toate datele sunt valide si nu mai exista un alt curs cu acelasi id
+3. enrollStudent - primind ca parametrii id-ul studentului si id-ul si parola cursului, realizeaza inscrierea studentului la curs si returneaza un MessageBundle ce cuprinde un mesaj si cursul in caz de succes
+4. addUser - primind ca parametrii username-ul si parola alese de administrator, numele si data nasterii utilizatorului, respectiv tipul contului, introduce un nou utilizator in baza de date. Acesta returneaza un MessageBundle continand un mesaj si utilizatorul nou creat in caz de succes.
+5. removeUser - primind ca parametru username-ul, sterge utilizatorul din baza de date
+6. listAllUsers - returneaza lista cu toti utilizatorii din baza de date
+
+# Manual de utilizare
+
+1. Se lanseaza in executie aplicatia utilizand metoda main din clasa EduApplication
+2. Se deschide "login.html" din cadrul proiectului edu_webclient
+3. Utilizatorul se logheaza utilizand credentialele, iar la apasarea butonului de login, acesta este redirectionat catre pagina aferenta tipului contului sau
+4. 4a.  Utilizatorul (Studentul) se poate inrola la un anumit curs utilizand id-ul si parola acestuia
+   4b. Utilizatorul (Profesorul) poate crea un nou curs prin introducerea id-ului, parolei si numele cursului, dar si data de inceput si cea de final a acestuia
+   4c. Utilizatorul (Administratorul) poate selecta din meniul aflat in partea de dreapta sus a ecranului sa:
+        - Adauge un nou utilizator prin alegerea username-ului si parolei contului, introducand apoi si numele, data de nastere, respectiv tipul contului 
+        - Sa stearga un utilizator pe baza username-ului acestuia
+        - Sa vizualizeze lista tututor userilor existenti
+5. In final, utilizatorul poate reveni la ecranul principal de login prin selectarea optiunii "Sign Out" din coltul dreapta sus a ecranului
+
+# Concluzii 
+
+Proiectul implementeaza in momentul prezent acele functionalitati ce creaza baza unei dezvoltari ulterioare fiind proiectat incat sa permita o scalare usoare si rapida a aplicatiei, dar si o mentenanta usoara. Structura aplicatiei si numeroasele design pattern-uri folosite permit flexibilitate in schimbarea partilor componente ale aplicatiei si inlocuirea lor cu noi tehnologii acolo unde este cazul fara a produce schimbari majore.
+Desigur, aceasta varianta permite multe imbunatatiri precum:
+- extinderea clientilor pe mai multe platforme
+- profesorii sa poata crea asssignment-uri pentru studentii din cadrul unui curs
+- profesorii sa poata vedea lista tuturor studentilor
+- studentii sa primeasca notificari cand un nou assignment este introdus
+- studentii sa poata sa vada toate assignmenturile terminate, dar si o lista cu cele care sunt inca active
+- studentii sa poata sa fie notati de catre profesori pentru assignmenturi

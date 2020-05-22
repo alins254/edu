@@ -1,9 +1,7 @@
 package entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity(name = "accounts")
 public class Account{
@@ -11,8 +9,6 @@ public class Account{
     private String username;
     @Column
     private String password;
-
-    //@OneToOne(fetch=FetchType.LAZY, targetEntity = Parent.class)
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private User user;
 

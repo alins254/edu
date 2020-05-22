@@ -1,4 +1,4 @@
-package com.example.sd2020.demo;
+package EduMain;
 
 import Utilities.Konstants;
 import Utilities.Utils;
